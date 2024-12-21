@@ -11,7 +11,7 @@
 
 ## Requirements
 
-- FreeBSD
+- FreeBSD or GhostBSD
 - OCaml (4.14.0 or compatible)
 - `lablgtk3`
 - `str`
