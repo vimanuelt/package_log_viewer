@@ -30,7 +30,7 @@ opam install lablgtk3 str
 ### 2. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/vimanuelt/package_log_viewer
 cd package_log_viewer
 ```
 
