@@ -51,20 +51,20 @@ let main () =
   (* Fetch and process logs *)
   let (pkg_lines, pkg_static_lines) = read_and_process_logs "/var/log/messages" in
 
-  (* Create tabs *)
-  let pkg_text_view = GText.view () in
-  pkg_text_view#set_editable false;
-  populate_text_view pkg_text_view pkg_lines;
-  ignore (notebook#append_page ~tab_label:((GMisc.label ~text:"Installed Packages" ())#coerce) pkg_text_view#coerce);
+  (* Create tabs with scroll bars *)
+  let create_scrolled_tab lines tab_label =
+    let scroll = GBin.scrolled_window ~hpolicy:`AUTOMATIC ~vpolicy:`AUTOMATIC () in
+    let text_view = GText.view ~packing:scroll#add () in
+    text_view#set_editable false;
+    populate_text_view text_view lines;
+    ignore (notebook#append_page ~tab_label:((GMisc.label ~text:tab_label ())#coerce) scroll#coerce)
+  in
 
-  let pkg_static_text_view = GText.view () in
-  pkg_static_text_view#set_editable false;
-  populate_text_view pkg_static_text_view pkg_static_lines;
-  ignore (notebook#append_page ~tab_label:((GMisc.label ~text:"Installed Ports" ())#coerce) pkg_static_text_view#coerce);
+  create_scrolled_tab pkg_lines "Installed Packages";
+  create_scrolled_tab pkg_static_lines "Installed Ports";
 
   (* Show the window and start the GTK main loop *)
   window#show ();
   Main.main ()
 
 let () = main ()
-
