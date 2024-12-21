@@ -27,17 +27,33 @@ git clone https://github.com/vimanuelt/package_log_viewer.git
 cd package_log_viewer
 ```
 
-### 2. Build the Application Using Makefile
+### 2. Build and Install the Application
 
-Run the following command to install dependencies and compile the application:
+Run the following commands to build and install the application:
+
+#### Build
 
 ```bash
 make
 ```
 
+#### Install
+
+```bash
+sudo make install
+```
+
+By default, the `make install` command will copy the compiled application (`plv`) to `/usr/local/bin` for global access.
+
 ### 3. Run the Application
 
-Once compiled, launch the application with:
+If installed globally:
+
+```bash
+plv
+```
+
+If running locally (without `make install`):
 
 ```bash
 ./plv
