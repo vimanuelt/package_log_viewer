@@ -37,13 +37,13 @@ cd package_log_viewer
 ### 3. Compile the Application
 
 ```bash
-ocamlfind ocamlc -thread -package lablgtk3,str -linkpkg -o package_log_viewer package_log_viewer.ml
+ocamlfind ocamlc -thread -package lablgtk3,str -linkpkg -o plv plv.ml
 ```
 
 ### 4. Run the Application
 
 ```bash
-./package_log_viewer
+./plv
 ```
 
 ## Usage
