@@ -14,35 +14,30 @@
 
 - **Operating System**: FreeBSD or GhostBSD
 - **OCaml Version**: 4.14.0 or compatible
-- **Dependencies**:
-  - `lablgtk3`
-  - `str`
-  - GTK3 runtime environment
+- **GTK3 runtime environment**
+
+> **Note**: All required OCaml dependencies are installed automatically via the Makefile.
 
 ## Installation
 
-### 1. Install Dependencies
-
-Ensure you have `opam` installed, then run:
-
-```bash
-opam install lablgtk3 str
-```
-
-### 2. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/vimanuelt/package_log_viewer.git
 cd package_log_viewer
 ```
 
-### 3. Compile the Application
+### 2. Build the Application Using Makefile
+
+Run the following command to install dependencies and compile the application:
 
 ```bash
-ocamlfind ocamlc -thread -package lablgtk3,str -linkpkg -o plv plv.ml
+make
 ```
 
-### 4. Run the Application
+### 3. Run the Application
+
+Once compiled, launch the application with:
 
 ```bash
 ./plv
@@ -84,4 +79,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - **Default Log Path**: The application reads logs from `/var/log/messages` by default. Update the path in the code if your logs are stored elsewhere.
 - **Future Updates**: We're considering renaming the application. If you have creative suggestions, please share them! 😉
 - **Compatibility**: Designed specifically for FreeBSD-based systems. Functionality may vary on other platforms.
-
