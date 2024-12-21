@@ -56,10 +56,9 @@ The logs are sorted with the newest entries displayed at the top.
 
 ## Screenshots
 
-     ```markdown
-     ![Installed Packages Tab](img/Installed-Packages.png)
-     ![Installed Ports Tab](img/Installed-Ports.png)
-     ```
+![Installed Packages Tab](img/Installed-Packages.png)
+
+![Installed Ports Tab](img/Installed-Ports.png)
 
 ## Contributing
 
