@@ -1,36 +1,30 @@
-# Compiler and flags
-OCAML = ocamlfind ocamlc
-OCAML_FLAGS = -thread -package lablgtk3,str -linkpkg
+# Makefile
 
-# Application name
-APP_NAME = plv
+# Compiler and flags
+OCAMLOPT = ocamlopt
+OCAMLCFLAGS = -g -o
+INCLUDES = -I src
 
 # Source files
-SRC = plv.ml
+SRCS = $(wildcard src/*.ml)
+OBJS = $(SRCS:.ml=.cmx)
 
-# Build targets
-all: $(APP_NAME)
+# Target executable
+TARGET = plv
 
-$(APP_NAME): $(SRC)
-	$(OCAML) $(OCAML_FLAGS) -o $(APP_NAME) $(SRC)
+# Default target
+all: $(TARGET)
 
-# Run the application
-run: $(APP_NAME)
-	./$(APP_NAME)
+# Link the native executable
+$(TARGET): $(OBJS)
+	$(OCAMLOPT) $(OCAMLCFLAGS) $(TARGET) $(OBJS) -linkpkg -package [YOUR_PACKAGES]
 
-# Clean up build files
+# Compile individual modules
+%.cmx: %.ml
+	$(OCAMLOPT) $(OCAMLCFLAGS) -c $<
+
+# Clean build artifacts
 clean:
-	rm -f $(APP_NAME) *.cmi *.cmo
+	rm -f src/*.cmx src/*.o $(TARGET)
 
-# Install the application (optional)
-install: $(APP_NAME)
-	@echo "Installing $(APP_NAME)..."
-	@cp $(APP_NAME) /usr/local/bin/
-
-# Uninstall the application (optional)
-uninstall:
-	@echo "Uninstalling $(APP_NAME)..."
-	@rm -f /usr/local/bin/$(APP_NAME)
-
-.PHONY: all run clean install uninstall
-
+.PHONY: all clean
