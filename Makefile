@@ -1,30 +1,25 @@
-# Makefile
+# Makefile for package_log_viewer
 
-# Compiler and flags
-OCAMLOPT = ocamlopt
-OCAMLCFLAGS = -g -o
-INCLUDES = -I src
+# Variables
+OCAMLFIND=ocamlfind
+OCAMLOPT=$(OCAMLFIND) ocamlopt
+PACKAGES=str,unix,lablgtk3,threads
+TARGET=plv
+SOURCES=plv.ml
+INSTALL_DIR=/usr/local/bin
 
-# Source files
-SRCS = $(wildcard src/*.ml)
-OBJS = $(SRCS:.ml=.cmx)
-
-# Target executable
-TARGET = plv
-
-# Default target
+# Rules
 all: $(TARGET)
 
-# Link the native executable
-$(TARGET): $(OBJS)
-	$(OCAMLOPT) $(OCAMLCFLAGS) $(TARGET) $(OBJS) -linkpkg -package [YOUR_PACKAGES]
+$(TARGET): $(SOURCES)
+	$(OCAMLOPT) -thread -g -o $(TARGET) -linkpkg -package $(PACKAGES) $(SOURCES)
 
-# Compile individual modules
-%.cmx: %.ml
-	$(OCAMLOPT) $(OCAMLCFLAGS) -c $<
+install: $(TARGET)
+	install -d $(INSTALL_DIR)
+	install -m 755 $(TARGET) $(INSTALL_DIR)
 
-# Clean build artifacts
 clean:
-	rm -f src/*.cmx src/*.o $(TARGET)
+	rm -f $(TARGET) *.cmx *.cmi *.o
 
-.PHONY: all clean
+.PHONY: all clean install
+
